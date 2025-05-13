@@ -2,11 +2,67 @@ workflows:
 
   fchat-workflow:
 
-    name: FChat Pipeline
+    name: My FChat Pipeline
+
+    instance_type: mac_mini_m2
+
+    max_build_duration: 60
+
+    inputs: # more information about build inputs:https://docs.codemagic.io/knowledge-codemagic/build-inputs/
+
+      name: # input ID
+
+        description: Input description
+
+        default: Codemagic
+
+    environment:
+
+      groups:
+
+        - group_name
+
+      vars:
+
+        BUNDLE_ID: "com.quocmanh.fchat-app"
+
+      cocoapods: default
+
+      xcode: latest
+
+    cache:
+
+      cache_paths:
+
+        - ~/.pub-cache
+
+    triggering:
+
+      events:
+
+        - push
+        - pull_request
+
+      branch_patterns:
+
+        - pattern: '*'
+
+          include: true
+
+          source: true
+
+      cancel_previous_builds: false
 
     scripts:
-      - name: CICD Started
-      - script: echo "Welcome to my first CICD setup"
+
+      - echo "Welcome to my first CICD setup"
+      - name: Install CocoaPods dependencies
+        scripts: |
+          pod install
+
+    artifacts:
+
+      - build/**/outputs/bundle/**/*.aab
 
     publishing:
 
@@ -15,3 +71,7 @@ workflows:
         recipients:
 
           - manhnq2002@gmail.com
+
+      scripts:
+
+        - echo 'Post-publish script'
