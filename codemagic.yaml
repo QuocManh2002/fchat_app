@@ -57,7 +57,7 @@ workflows:
 
       - echo "Welcome to my first CICD setup"
       - name: Install CocoaPods dependencies
-        scripts: |
+        script: |
           pod install
 
     artifacts:
