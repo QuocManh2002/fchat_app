@@ -1,0 +1,17 @@
+workflows:
+
+  fchat-workflow:
+
+    name: FChat Pipeline
+
+    scripts:
+      - name: CICD Started
+      - script: echo "Welcome to my first CICD setup"
+
+    publishing:
+
+      email:
+
+        recipients:
+
+          - manhnq2002@gmail.com
